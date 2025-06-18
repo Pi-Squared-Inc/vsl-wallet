@@ -6,7 +6,7 @@ import type { Snap } from '@metamask/snaps-sdk';
 
 export type GetSnapsResponse = Record<string, Snap>;
 
-export const defaultSnapOrigin = 'npm:vsl_snap_backend';
+export const defaultSnapOrigin = process.env.NEXT_PUBLIC_DEFAULT_SNAP_ORIGIN;
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
 
 export async function hasSnapsSupport(

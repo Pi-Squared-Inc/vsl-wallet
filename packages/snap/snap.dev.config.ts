@@ -13,7 +13,7 @@ const config: SnapConfig = {
   },
   // You must use 127.0.0.1 instead of localhost as node by default try ipv6 first
   environment: {
-    VSL_ENDPOINT: 'http://144.76.7.152:44444',
+    VSL_ENDPOINT: 'http://127.0.0.1:44444',
   },
 };
 

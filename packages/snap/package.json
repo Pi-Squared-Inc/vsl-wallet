@@ -8,13 +8,10 @@
     "snap.manifest.json"
   ],
   "scripts": {
-    "allow-scripts": "npm run allow-scripts --workspace=root",
-    "build": "mm-snap build",
-    "build:clean": "yarn clean && yarn build",
-    "clean": "rimraf dist",
-    "prepublishOnly": "mm-snap manifest",
-    "serve": "mm-snap serve",
-    "start": "mm-snap watch",
+    "build": "mm-snap build --config snap.prod.config.ts",
+    "serve": "mm-snap serve --config snap.dev.config.ts",
+    "prepublish": "mm-snap manifest --config snap.prod.config.ts",
+    "clean": "rm -r dist/* 2>/dev/null || true",
     "test": "jest"
   },
   "dependencies": {
@@ -24,10 +21,10 @@
     "dotenv": "^16.5.0"
   },
   "devDependencies": {
-    "@jest/globals": "^29.5.0",
     "@metamask/snaps-cli": "^6.6.0",
     "@metamask/snaps-jest": "^8.9.0",
     "@types/uuid": "^10.0.0",
+    "@jest/globals": "^29.5.0",
     "jest": "^29.5.0",
     "ts-jest": "^29.1.0"
   },
