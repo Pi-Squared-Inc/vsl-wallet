@@ -1,17 +1,17 @@
 {
-  "version": "0.1.5",
+  "version": "0.0.1",
   "description": "A Snap for VSL that allows users to interact with the VSL Core RPC Services.",
-  "proposedName": "VSL Integration",
+  "proposedName": "VSL Wallet",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pi-Squared-Inc/vsl"
+    "url": "https://github.com/Pi-Squared-Inc/vsl-wallet"
   },
   "source": {
-    "shasum": "1eSyrJuuxY4Rh7TJVCLKU66BL9MpuFP1OOO5uY69BYc=",
+    "shasum": "LQCZex8vX6uZOREnI2w+DMpr0HGRf25ChlFiiQajjFA=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "packageName": "vsl_snap_backend",
+        "packageName": "vsl_snap",
         "registry": "https://registry.npmjs.org/"
       }
     }
