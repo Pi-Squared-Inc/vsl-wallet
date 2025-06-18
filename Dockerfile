@@ -16,7 +16,7 @@ RUN \
 FROM base AS builder
 WORKDIR /opt/app
 COPY --from=deps /opt/app/node_modules ./node_modules
-COPY --from=deps /opt/app/packages/companion/node_modules ./packages/companion/node_modules
+COPY --from=deps /opt/app/packages/site/node_modules ./packages/site/node_modules
 COPY --from=deps /opt/app/packages/snap/node_modules ./packages/snap/node_modules
 COPY . .
 
@@ -36,9 +36,9 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder --chown=nextjs:nodejs /opt/app/packages/companion/.next/standalone standalone
-COPY --from=builder --chown=nextjs:nodejs /opt/app/packages/companion/public standalone/packages/companion/public
-COPY --from=builder --chown=nextjs:nodejs /opt/app/packages/companion/.next/static standalone/packages/companion/.next/static
+COPY --from=builder --chown=nextjs:nodejs /opt/app/packages/site/.next/standalone standalone
+COPY --from=builder --chown=nextjs:nodejs /opt/app/packages/site/public standalone/packages/site/public
+COPY --from=builder --chown=nextjs:nodejs /opt/app/packages/site/.next/static standalone/packages/site/.next/static
 
 USER nextjs
 
@@ -47,4 +47,4 @@ EXPOSE 8000
 ENV PORT=8000
 ENV NEXT_PRIVATE_STANDALONE=true
 
-ENTRYPOINT [ "node", "/opt/app/standalone/packages/companion/server.js" ]
+ENTRYPOINT [ "node", "/opt/app/standalone/packages/site/server.js" ]
