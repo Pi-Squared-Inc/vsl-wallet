@@ -7,7 +7,7 @@ import type { Snap } from "@metamask/snaps-sdk";
 export type GetSnapsResponse = Record<string, Snap>;
 
 export const defaultSnapOrigin =
-process.env.NEXT_PUBLIC_DEFAULT_SNAP_ORIGIN ?? 'local:http://localhost:8080';
+  process.env.NEXT_PUBLIC_DEFAULT_SNAP_ORIGIN ?? 'local:http://localhost:8080';
 
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
 

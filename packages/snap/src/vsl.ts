@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid';
-import { string, z } from 'zod/v4';
+import { z } from 'zod/v4';
 import { stringify, throwError } from './util';
-import { MessageObject, signMessage } from './signing';
+import { signMessage } from './signing';
 import { VSLKeyring } from './keyring';
-import { VSLMethod, VSLMethodEnum } from './schema/vsl/schema';
+import { VSLMethodEnum } from './schema/vsl/schema';
 import { VSLMethodConfig } from './schema/vsl/config';
 import { throwVSLInvalidParams, throwVSLInvalidReturn } from './error';
 
