@@ -1,6 +1,7 @@
 import { throwKeyringRequestFailed } from "@/utils/error";
 import { useMetaMaskContext } from "../MetaMaskContext"
 import { InfoTable } from "@/components/index/InfoTable";
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const deleteAccountAction = {
     name: 'Delete Account',
@@ -8,8 +9,11 @@ export const deleteAccountAction = {
     preparer: (id: string) => [id],
     useHandler: () => {
         const { client } = useMetaMaskContext();
+        const guard = useSnapReadyGuard();
 
         return async (id: string) => {
+            guard();
+
             if (client === null) return;
 
             try {

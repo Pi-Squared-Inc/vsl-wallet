@@ -24,7 +24,6 @@ export async function callVSLMethod(
         );
 
     const parsedResult = config.return.safeParse(result);
-    console.warn("VSL Result", JSON.stringify(result, null, 2));
     if (!parsedResult.success) {
         throwVSLInvalidReturn(method, parsedResult.error.issues);
     }
@@ -86,9 +85,6 @@ export async function sendRPCRequest(
     params: object,
 ) {
     const requestBody = createRPCRequest(method, params);
-    console.warn('Sending RPC request:', stringify(requestBody));
-
-    console.warn('VSL Endpoint:', process.env.VSL_ENDPOINT);
 
     const response = await fetch(process.env.VSL_ENDPOINT!, requestBody);
     if (!response.ok) {

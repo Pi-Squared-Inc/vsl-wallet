@@ -142,7 +142,6 @@ export function AccountActionPanel() {
     }
 
     const parameters = selectedAction.preparer(selectedAccountId!, Object.fromEntries(inputs))
-    console.log("Parameters for action:", parameters);
     try {
       const result = await (handlers[selectedActionIndex] as any)(...parameters as any);
       await refreshState();

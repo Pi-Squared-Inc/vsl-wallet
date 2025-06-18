@@ -8,18 +8,22 @@ import { KeyringSnapRpcClient } from '@metamask/keyring-snap-client';
 
 type MetaMaskContextType = {
   provider: MetaMaskInpageProvider | null;
-  installedSnap: Snap | null;
   error: Error | null;
-  client: KeyringSnapRpcClient | null;
-  setInstalledSnap: (snap: Snap | null) => void;
   setError: (error: Error) => void;
+  installedSnap: Snap | null;
+  setInstalledSnap: (snap: Snap | null) => void;
+  reconnecting: boolean;
+  setReconnecting: (reconnecting: boolean) => void;
+  client: KeyringSnapRpcClient | null;
 };
 
 export const MetaMaskContext = createContext<MetaMaskContextType>({
   provider: null,
   installedSnap: null,
+  reconnecting: false,
   error: null,
   client: null,
+  setReconnecting: () => {},
   setInstalledSnap: () => {},
   setError: () => {},
 });
@@ -29,6 +33,7 @@ export const MetaMaskProvider = ({ children }: { children: ReactNode }) => {
   const [client, setClient] = useState<KeyringSnapRpcClient | null>(null);
   const [installedSnap, setInstalledSnap] = useState<Snap | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [reconnecting, setReconnecting] = useState(false);
 
   useEffect(() => {
     getSnapsProvider().then(setProvider).catch(console.error);
@@ -54,7 +59,13 @@ export const MetaMaskProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <MetaMaskContext.Provider
-      value={{ provider, error, client, setError, installedSnap, setInstalledSnap }}
+      value={{
+        provider,
+        error, setError,
+        installedSnap, setInstalledSnap,
+        reconnecting, setReconnecting,
+        client
+      }}
     >
       {children}
     </MetaMaskContext.Provider>

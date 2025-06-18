@@ -1,6 +1,7 @@
 import { throwKeyringRequestFailed } from "@/utils/error";
 import { useInvokeSnap } from "../useInvokeSnap";
 import { InfoTable } from "@/components/index/InfoTable";
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const getHealthAction = {
   name: 'Get Health',
@@ -8,8 +9,11 @@ export const getHealthAction = {
   preparer: (id: string) => [id],
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
+    const guard = useSnapReadyGuard();
 
     return async () => {
+      guard();
+
       try {
         return await invokeSnap({
           method: 'getHealth',

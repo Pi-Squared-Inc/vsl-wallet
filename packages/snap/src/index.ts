@@ -1,4 +1,4 @@
-import { SnapError, UserInputEventType, type OnKeyringRequestHandler, type OnRpcRequestHandler, type OnUserInputHandler } from '@metamask/snaps-sdk';
+import { UserInputEventType, type OnKeyringRequestHandler, type OnRpcRequestHandler, type OnUserInputHandler } from '@metamask/snaps-sdk';
 
 import { handleKeyringRequest } from '@metamask/keyring-snap-sdk';
 import { VSLKeyring } from './keyring';
@@ -14,7 +14,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   const keyring = await getKeyring();
   const result = await handleRPCRequest(keyring, request);
 
-  console.warn("onRpcRequest result", result);
+  console.log("onRpcRequest result", result);
 
   return result ?? null;
 };
@@ -40,13 +40,7 @@ export const onKeyringRequest: OnKeyringRequestHandler = async ({
   const keyring = await getKeyring();
   const result = await handleKeyringRequest(keyring, request);
 
-  console.warn("onKeyringRequest result", result);
+  console.log("onKeyringRequest result", result);
 
   return result ?? null;
-}
-
-export const onUserInput: OnUserInputHandler = async ({ id, event }) => {
-  if (event.type === UserInputEventType.FormSubmitEvent) {
-    console.warn("onUserInput FormSubmitEvent", id, event);
-  }
 }

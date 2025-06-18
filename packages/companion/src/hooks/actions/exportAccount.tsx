@@ -2,6 +2,7 @@ import { throwKeyringRequestFailed } from "@/utils/error";
 import { useMetaMaskContext } from "../MetaMaskContext"
 import { InfoRow, InfoTable } from "@/components/index/InfoTable";
 import { KeyringAccount } from '@metamask/keyring-api';
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const formatAccountInfo = (data: {
   account: KeyringAccount;
@@ -35,8 +36,11 @@ export const exportAccountAction = {
   preparer: (id: string) => [id],
   useHandler: () => {
     const { client } = useMetaMaskContext();
+    const guard = useSnapReadyGuard();
 
     return async (id: string) => {
+      guard()
+
       if (client === null) return;
 
       try {

@@ -2,6 +2,7 @@ import { throwAccountNotFound, throwKeyringRequestFailed } from "@/utils/error";
 import { useInvokeSnap } from "../useInvokeSnap";
 import { useSnapStoreContext } from "../SnapStoreContext";
 import { InfoTable } from "@/components/index/InfoTable";
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const getBalanceAction = {
     name: 'Get Balance',
@@ -10,8 +11,11 @@ export const getBalanceAction = {
     useHandler: () => {
         const invokeSnap = useInvokeSnap();
         const { state } = useSnapStoreContext();
+        const guard = useSnapReadyGuard();
 
         return async (id: string) => {
+            guard();
+
             const address = state.accounts[id]?.keyringAccount?.address;
 
             if (address === undefined) {

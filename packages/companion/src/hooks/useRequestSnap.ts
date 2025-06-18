@@ -16,12 +16,10 @@ export const useRequestSnap = (
   version?: string,
 ) => {
   const request = useRequest();
-  const { setInstalledSnap } = useMetaMaskContext();
+  const { setInstalledSnap, setReconnecting } = useMetaMaskContext();
 
-  /**
-   * Request the Snap.local:http://localhost:8080
-   */
   const requestSnap = async () => {
+    setReconnecting(true);
     const snaps = (await request({
       method: 'wallet_requestSnaps',
       params: {
@@ -31,6 +29,7 @@ export const useRequestSnap = (
 
     // Updates the `installedSnap` context variable since we just installed the Snap.
     setInstalledSnap(snaps?.[snapId] ?? null);
+    setReconnecting(false);
   };
 
   return requestSnap;

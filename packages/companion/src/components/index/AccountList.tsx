@@ -35,11 +35,22 @@ function AccountRow ({ text, onClick, selected }: AccountRowProps) {
 export function AccountList () {
   const { installedSnap } = useMetaMask();
   const { state } = useSnapStoreContext();
-  const refreshState = refreshStateAction.useHandler();
+  const { setError } = useSnapStore();
   const { selectAccountId } = useSnapStore();
 
+  const refreshState = refreshStateAction.useHandler();
+
   useEffect(() => {
-    refreshState();
+    (async () => {
+      try {
+        await refreshState();
+      } catch (error) {
+        setError((error as Error).message);
+      }
+    })();
+    // You cannot add refreshState to the dependency array here,
+    // because it would cause an infinite loop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [installedSnap]);
 
   const format = (address: string) => {

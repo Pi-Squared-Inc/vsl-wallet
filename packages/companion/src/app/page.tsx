@@ -4,7 +4,6 @@ import { DashboardContainer } from "@/components/index/DashboardContainer";
 import { StateUpdater } from "@/components/index/StateUpdater";
 import { MetaMaskButton } from "@/components/MetaMaskButton"
 import { SnapStoreProvider } from "@/hooks/SnapStoreContext";
-import { defaultSnapOrigin } from "@/utils/metamask";
 
 function DashboardHeader() {
   return (

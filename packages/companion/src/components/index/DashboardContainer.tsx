@@ -6,6 +6,7 @@ import { AccountInfoPanel } from "./AccountInfoPanel";
 import { AccountActionPanel } from "./AccountActionPanel";
 import { ErrorPanel } from "./ErrorPanel";
 import { JSX, ReactNode } from "react";
+import { useMetaMask } from "@/hooks/useMetaMask";
 
 export function AccountPanel() {
   return (<div className="flex flex-col gap-1">
@@ -16,13 +17,22 @@ export function AccountPanel() {
 }
 
 export function DashboardContainer() {
+  const { installedSnap } = useMetaMask();
   const { useGreater, useBetween } = BreakPointHooks(breakpointsTailwind);
 
   const greaterThanXl   = useGreater('xl');
   const betweenMdAndXl  = useBetween('md', 'xl');
 
-  let layout: JSX.Element | ReactNode = null;
+  if (!installedSnap) {
+    return (
+      <div className="flex flex-col gap-2 border-2 rounded-lg p-4 border-gray-500">
+        <h2 className="text-xl font-semibold text-gray-200">Snap not connected!</h2>
+        <p className="text-gray-400">Click Connect button to start using VSL Snap Dashboard</p>
+      </div>
+    )
+  }
 
+  let layout: JSX.Element | ReactNode = null;
   if (greaterThanXl) {
     layout = (
       <div className="flex flex-row gap-4">

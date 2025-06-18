@@ -1,7 +1,11 @@
 import { z, ZodError } from "zod/v4";
 
-export const throwKeyringNotReady = () => {
-    throw new Error('Keyring is not ready');
+export const throwSnapNotConnected = () => {
+    throw new Error('Snap is not connected. Please install the Snap and connect it to MetaMask.');
+}
+
+export const throwSnapIsReconnecting = () => {
+    throw new Error('Snap is currently reconnecting. Please wait until the reconnection is complete.');
 }
 
 export const throwKeyringRequestFailed = (method: string, error: Error) => {

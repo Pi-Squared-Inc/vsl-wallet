@@ -4,6 +4,7 @@ import { useSnapStoreContext } from "../SnapStoreContext";
 import { InfoTable } from "@/components/index/InfoTable";
 import { CompanionAssetBalance, CompanionAssetName } from "@/utils/schema/schema";
 import { updateAccountAction } from "./updateAccount";
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const createAssetAction = {
   name: 'Create Asset',
@@ -20,8 +21,10 @@ export const createAssetAction = {
     const invokeSnap = useInvokeSnap();
     const { state } = useSnapStoreContext();
     const updateAccounts = updateAccountAction.useHandler();
+    const guard = useSnapReadyGuard();
 
     return async (id: string, assetName: string, assetSupply: string) => {
+      guard();
       const account = state.accounts[id];
       if (account === undefined) {
         throwAccountNotFound(id);

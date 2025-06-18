@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMetaMaskContext } from './MetaMaskContext';
 import { useRequest } from './useRequest';
 import { defaultSnapOrigin } from '@/utils/metamask';
@@ -40,6 +40,9 @@ export const useMetaMask = () => {
     };
 
     detect().catch(console.error);
+  // no need to also include detectFlask and getSnap in the dependency array
+  // as when the provider changes, they will also be evaluated again.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provider]);
 
   return { isFlask, snapsDetected, installedSnap, getSnap };

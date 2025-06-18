@@ -3,6 +3,7 @@ import { useInvokeSnap } from "../useInvokeSnap";
 import { useSnapStoreContext } from "../SnapStoreContext";
 import { CompanionAssetId } from "@/utils/schema/schema";
 import { InfoTable } from "@/components/index/InfoTable";
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const getAssetBalanceAction = {
   name: 'Get Asset Balance',
@@ -16,8 +17,10 @@ export const getAssetBalanceAction = {
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
     const { state } = useSnapStoreContext();
+    const guard = useSnapReadyGuard();
 
     return async (id: string, assetId: string) => {
+      guard();
       const address = state.accounts[id]?.keyringAccount?.address;
 
       if (address === undefined) {

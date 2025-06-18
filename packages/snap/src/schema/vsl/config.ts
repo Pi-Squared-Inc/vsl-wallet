@@ -17,6 +17,7 @@ import { TransferAssetSchema } from './vsl_transferAsset';
 
 import z from "zod/v4";
 import { VSLMethod, VSLMethodEnum } from "./schema";
+import { GetAccountNonceSchema } from './vsl_getAccountNonce';
 
 export type VSLMethodConfigType = {
     [key in VSLMethodEnum]: {
@@ -44,4 +45,5 @@ export const VSLMethodConfig: VSLMethodConfigType = {
     [VSLMethod.vsl_createAsset]                    : CreateAssetSchema,
     [VSLMethod.vsl_transferAsset]                  : TransferAssetSchema,
     [VSLMethod.vsl_getHealth]                      : GetHealthSchema,
+    [VSLMethod.vsl_getAccountNonce]                : GetAccountNonceSchema
 } as const;

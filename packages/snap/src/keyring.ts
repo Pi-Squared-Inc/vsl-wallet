@@ -44,6 +44,7 @@ import { v4 as uuid } from 'uuid';
 import { saveState } from './state';
 import { encodeMessage } from './encoding';
 import { getSignature } from './signing';
+import { callVSLMethod } from './vsl';
 
 export type KeyringState = {
     wallets: Record<string, Wallet>;
@@ -96,24 +97,10 @@ export class VSLKeyring implements Keyring {
             throwError(`Account address already in use: ${address}`);
         }
 
-        console.warn(`Creating account with address: ${address} and options:`, options);
-
         // Private key must not be exposed to the metamask
         if (options?.privateKey) {
             delete options.privateKey;
         }
-
-        const nonce = options?.nonce;
-        let nonceValue: bigint;
-        try {
-            nonceValue = BigInt(nonce as any);
-        } catch {
-            nonceValue = 0n;
-        }
-        if (options?.nonce !== undefined) {
-            delete options.nonce;
-        }
-
 
         const accountId = uuid();
         const account: KeyringAccount = {
@@ -128,6 +115,15 @@ export class VSLKeyring implements Keyring {
             type: EthAccountType.Eoa,
         };
 
+        let nonce: string;
+        try {
+            nonce = await callVSLMethod('vsl_getAccountNonce', {
+                account_id: address,
+            })
+        } catch (err) {
+            throwError(`Cannot retrieve VSL Account nonces: ${(err as Error).message}`);
+        }
+
         // Create the VSL account in the core.
         await this.#emitEvent(KeyringEvent.AccountCreated, {
             account,
@@ -138,7 +134,7 @@ export class VSLKeyring implements Keyring {
         this.#state.wallets[account.id] = {
             account,
             privateKey,
-            nonce: String(nonceValue),
+            nonce,
         };
         await this.#saveState(
             'Failed to save new account state, if you see this message, ' +
@@ -234,8 +230,6 @@ export class VSLKeyring implements Keyring {
 
     async #syncSubmitRequest(request: KeyringRequest): Promise<SubmitRequestResponse> {
         const { method, params = [] } = request.request;
-
-        console.warn('request', JSON.stringify(request, null, 2));
 
         const wallet = await this.getWallet(request.account);
 

@@ -7,17 +7,23 @@ import { refreshStateAction } from "@/hooks/actions/refreshState";
 import { MdAutorenew } from "react-icons/md";
 import { importAccountAction } from "@/hooks/actions/importAccount";
 import { useSnapStore } from "@/hooks/useSnapStore";
-import { RawTextArea } from "../RawTextArea";
 import { Json } from "@metamask/utils";
 import z from "zod/v4";
 
 export function AccountCreationAction() {
+  const { setError, clearError } = useSnapStore();
   const createAccount = createAccountAction.useHandler();
   const refreshState = refreshStateAction.useHandler();
 
   const onClick = async () => {
-    await createAccount();
-    await refreshState();
+    try {
+      await createAccount();
+      await refreshState();
+
+      clearError();
+    } catch (error) {
+      setError((error as Error).message);
+    }
   };
 
   return (
@@ -42,16 +48,16 @@ export function AccountImportAction() {
 
   const cleanHex = inputValue.trim().replace(/^0x/, "");
   const isValidHex = /^[0-9A-Fa-f]{64}$/.test(cleanHex);
+
   const importAccount = importAccountAction.useHandler();
   const refreshState = refreshStateAction.useHandler();
   const { setError, clearError } = useSnapStore();
 
-  const [ nonce, setNonce ] = useState<number>(0);
   const [ options, setOptions ] = useState<Record<string, Json>>({});
 
   const onImport = async () => {
     try {
-      await importAccount(cleanHex, nonce, options);
+      await importAccount(cleanHex, options);
       await refreshState();
 
       clearError();
@@ -68,18 +74,10 @@ export function AccountImportAction() {
     setInputValue(randomKey.toString("hex"));
   };
 
-  const parseNonce = (value: string) => {
-    const parsed = z.coerce.number().safeParse(value);
-    if (parsed.success) {
-      return parsed.data;
-    }
-    return 0;
-  }
-
   const parseOptions = (value: string) => {
     try {
       return z.record(z.string(), z.json()).parse(JSON.parse(value));
-    } catch (error) {
+    } catch {
       return {};
     }
   };
@@ -101,7 +99,6 @@ export function AccountImportAction() {
         </div>
         <div className="-mx-1">
           <HexInputGrid value={inputValue} onChange={(value) => {
-            console.warn("HexInputGrid onChange", value);
             setInputValue(value);
           }} />
         </div>
@@ -110,19 +107,6 @@ export function AccountImportAction() {
           <KeyGrid privateKey={inputValue} onChange={setInputValue} />
         )}
 
-        <div className="flex flex-col">
-          <label className="text-gray-200 font-[550] ml-0.5 mb-0.75">Nonce</label>
-          <input
-            type="number"
-            onChange={(e) => setNonce(parseNonce(e.target.value))}
-            className="
-              p-2 border-2 border-gray-500 bg-transparent text-gray-200
-              hover:border-gray-200 rounded-lg
-              focus:outline-none focus:border-violet-500
-              transition-colors duration-200
-            "
-          />
-        </div>
         <div className="flex flex-col">
           <label className="text-gray-200 font-[550] ml-0.5 mb-0.75">Options</label>
           <input

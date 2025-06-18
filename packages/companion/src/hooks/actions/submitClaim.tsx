@@ -3,6 +3,7 @@ import { useInvokeSnap } from "../useInvokeSnap";
 import { useSnapStoreContext } from "../SnapStoreContext";
 import { InfoTable } from "@/components/index/InfoTable";
 import { CompanionAddressArray, CompanionClaim, CompanionClaimType, CompanionFee, CompanionProof, CompanionQuorum, CompanionTimestampNanos, CompanionTimestampSeconds } from "@/utils/schema/schema";
+import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const submitClaimAction = {
   name: 'Submit Claim',
@@ -29,12 +30,15 @@ export const submitClaimAction = {
   ]),
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
+    const guard = useSnapReadyGuard();
     const { state } = useSnapStoreContext();
 
     return async (
         id: string, receivers: string[], claim: string, claimType: string,
         proof: string, quorum: string, seconds: number, nanos: number, fee: string
     ) => {
+      guard();
+
       const address = state.accounts[id]?.keyringAccount?.address;
 
       if (address === undefined) {
@@ -42,22 +46,6 @@ export const submitClaimAction = {
       }
 
       try {
-        console.log("Submitting claim with parameters:", {
-          method: 'submitClaim',
-          params: {
-            snapAccountId: id,
-            data: {
-              sender: address,
-              receivers,
-              claim,
-              claimType,
-              proof,
-              quorum,
-              expires: { seconds, nanos },
-              fee
-            }
-          }
-        })
         return await invokeSnap({
           method: 'submitClaim',
           params: {
