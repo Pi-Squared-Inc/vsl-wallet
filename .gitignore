@@ -77,3 +77,4 @@ node_modules/
 .pnp.*
 
 .vscode/
+package-lock.json
