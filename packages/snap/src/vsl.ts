@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid';
-import { string, z } from 'zod/v4';
+import { z } from 'zod/v4';
 import { stringify, throwError } from './util';
-import { MessageObject, signMessage } from './signing';
+import { signMessage } from './signing';
 import { VSLKeyring } from './keyring';
-import { VSLMethod, VSLMethodEnum } from './schema/vsl/schema';
+import { VSLMethodEnum } from './schema/vsl/schema';
 import { VSLMethodConfig } from './schema/vsl/config';
 import { throwVSLInvalidParams, throwVSLInvalidReturn } from './error';
 
@@ -24,7 +24,6 @@ export async function callVSLMethod(
         );
 
     const parsedResult = config.return.safeParse(result);
-    console.warn("VSL Result", JSON.stringify(result, null, 2));
     if (!parsedResult.success) {
         throwVSLInvalidReturn(method, parsedResult.error.issues);
     }
@@ -86,9 +85,6 @@ export async function sendRPCRequest(
     params: object,
 ) {
     const requestBody = createRPCRequest(method, params);
-    console.warn('Sending RPC request:', stringify(requestBody));
-
-    console.warn('VSL Endpoint:', process.env.VSL_ENDPOINT);
 
     const response = await fetch(process.env.VSL_ENDPOINT!, requestBody);
     if (!response.ok) {

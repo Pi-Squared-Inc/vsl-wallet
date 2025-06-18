@@ -9,8 +9,13 @@
 	],
 	"scripts": {
 		"build": "npm run build --workspaces",
-		"start": "npm run start --workspaces",
-		"test": "npm run test --workspaces=packages/snap"
+		"release-snap": "cd packages/snap && npm run prepublish && npm publish --provenance",
+		"dev-site": "npm run dev --workspace packages/site",
+		"dev-snap": "npm run dev --workspace packages/snap",
+		"dev": "run-p dev-site dev-snap",
+		"dev-site:remote": "npm run dev:remote --workspace packages/site",
+		"dev-snap:remote": "npm run dev:remote --workspace packages/snap",
+		"dev:remote": "run-p dev-site:remote dev-snap:remote"
 	},
 	"devDependencies": {
 		"@metamask/snaps-cli": "^7.1.0",

@@ -26,7 +26,6 @@ export async function runAsyncSensitive<T>(
     try {
         return await callback();
     } catch (err) {
-        console.warn('Here we get an error');
         // TODO!: change this to message at production
         throw new Error((err as Error).message);
     }

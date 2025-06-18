@@ -26,7 +26,7 @@ export const UnsignedCasted = <T extends number>(bit: T) => {
         .lt(2n ** BigInt(bit), UnsignedOutOfRangeError(`${name} (casted bigint)`, bit));
 }
 
-export const UnsignedCastedString = <T extends number>(bit: T) => {
+export const UnsignedCastedGeneric = <T extends number>(bit: T) => {
     return (name: string) => z.coerce.bigint(NotAnEncodedUnsignedError(name))
         .gte(0n, UnsignedNegativeError(name, bit))
         .lt(2n ** BigInt(bit), UnsignedOutOfRangeError(name, bit))
@@ -35,7 +35,7 @@ export const UnsignedCastedString = <T extends number>(bit: T) => {
 export const UnsignedString = <T extends number>(bit: T) => {
     return (name: string) => z.string(NotAnStringError(name))
         .check((context) => {
-            const Unsigned = UnsignedCastedString(bit)(`${name} (string encoded bigint)`);
+            const Unsigned = UnsignedCastedGeneric(bit)(`${name} (string encoded bigint)`);
             const result = Unsigned.safeParse(context.value);
             if (!result.success) {
                 context.issues = result.error.issues;
@@ -43,11 +43,24 @@ export const UnsignedString = <T extends number>(bit: T) => {
         })
 }
 
+export const UnsignedStringCasted = <T extends number>(bit: T) => {
+    return (name: string) => z.preprocess((value) => {
+        if (typeof value === 'number') {
+            return value.toString();
+        }
+        if (typeof value === 'bigint') {
+            return value.toString();
+        }
+        return value;
+    }, UnsignedString(bit)(name))
+}
+
+
 export const UnsignedPrefixedHexString = <T extends number>(bit: T) => {
     return (name: string) => z.string(NotAnStringError(name))
         .regex(/^0x[0-9A-Fa-f]+$/, NotAPrefixedHexStringError(name))
         .check((context) => {
-            const Unsigned = UnsignedCastedString(bit)(`${name} (hex string encoded bigint)`);
+            const Unsigned = UnsignedCastedGeneric(bit)(`${name} (hex string encoded bigint)`);
             const result = Unsigned.safeParse(context.value);
             if (!result.success) {
                 context.issues = result.error.issues;
@@ -91,6 +104,12 @@ export const Integer = {
     u64String: UnsignedString(64),
     u128String: UnsignedString(128),
     u256String: UnsignedString(256),
+    u8StringCasted: UnsignedStringCasted(8),
+    u16StringCasted: UnsignedStringCasted(16),
+    u32StringCasted: UnsignedStringCasted(32),
+    u64StringCasted: UnsignedStringCasted(64),
+    u128StringCasted: UnsignedStringCasted(128),
+    u256StringCasted: UnsignedStringCasted(256),
     u8PrefixedHexString: UnsignedPrefixedHexString(8),
     u16PrefixedHexString: UnsignedPrefixedHexString(16),
     u32PrefixedHexString: UnsignedPrefixedHexString(32),

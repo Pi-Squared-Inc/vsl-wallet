@@ -33,6 +33,7 @@ export const VSLMethodEnumSchema = z.enum([
 
     // Misc
     'vsl_getHealth',
+    'vsl_getAccountNonce'
 ]);
 
 export type VSLMethodEnum = z.infer<typeof VSLMethodEnumSchema>;
@@ -76,7 +77,7 @@ export const VSLTimestamp = z.object({
 ))
 
 export const VSLNonce = Integer
-    .u64String("Nonce")
+    .u64StringCasted("Nonce")
 
 // TODO: Check if this is correct
 export const VSLFee = Integer

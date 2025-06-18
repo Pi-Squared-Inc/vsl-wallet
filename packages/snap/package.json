@@ -9,7 +9,8 @@
 	],
 	"scripts": {
 		"build": "mm-snap build --config snap.prod.config.ts",
-		"serve": "mm-snap serve --config snap.dev.config.ts",
+		"dev:remote": "mm-snap watch --config snap.prod.config.ts",
+		"dev": "mm-snap watch --config snap.dev.config.ts",
 		"prepublish": "mm-snap manifest --config snap.prod.config.ts",
 		"clean": "rm -r dist/* 2>/dev/null || true",
 		"test": "jest"
