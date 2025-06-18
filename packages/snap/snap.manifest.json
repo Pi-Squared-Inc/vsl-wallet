@@ -1,0 +1,34 @@
+{
+  "version": "0.1.5",
+  "description": "A Snap for VSL that allows users to interact with the VSL Core RPC Services.",
+  "proposedName": "VSL Integration",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pi-Squared-Inc/vsl"
+  },
+  "source": {
+    "shasum": "1eSyrJuuxY4Rh7TJVCLKU66BL9MpuFP1OOO5uY69BYc=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "vsl_snap_backend",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:keyring": {
+      "allowedOrigins": ["http://localhost:8000", "http://69.62.71.157:8000"]
+    },
+    "snap_dialog": {},
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": true
+    },
+    "endowment:network-access": {},
+    "snap_manageAccounts": {},
+    "snap_manageState": {}
+  },
+  "platformVersion": "6.18.0",
+  "manifestVersion": "0.1"
+}
