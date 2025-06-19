@@ -1,0 +1,10 @@
+services:
+  site:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    expose:
+      - 8000
+    ports:
+      - 8000:8000

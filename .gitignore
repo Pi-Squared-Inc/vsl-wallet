@@ -3,7 +3,6 @@ dist/
 build/
 coverage/
 .cache/
-public/
 
 # Logs
 logs
@@ -76,4 +75,3 @@ node_modules/
 .pnp.*
 
 .vscode/
-package-lock.json
