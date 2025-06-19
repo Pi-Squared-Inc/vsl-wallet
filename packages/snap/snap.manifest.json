@@ -1,34 +1,39 @@
 {
-	"version": "0.0.1",
-	"description": "A Snap for VSL that allows users to interact with the VSL Core RPC Services.",
-	"proposedName": "VSL Wallet",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Pi-Squared-Inc/vsl-wallet"
-	},
-	"source": {
-		"shasum": "JGGjVAGIim2yxlGDhw1CydabSi1Tt0Es3BfgghlSVVc=",
-		"location": {
-			"npm": {
-				"filePath": "dist/bundle.js",
-				"packageName": "vsl_snap",
-				"registry": "https://registry.npmjs.org/"
-			}
-		}
-	},
-	"initialPermissions": {
-		"endowment:keyring": {
-			"allowedOrigins": ["http://localhost:8000", "http://69.62.71.157:8000"]
-		},
-		"snap_dialog": {},
-		"endowment:rpc": {
-			"dapps": true,
-			"snaps": true
-		},
-		"endowment:network-access": {},
-		"snap_manageAccounts": {},
-		"snap_manageState": {}
-	},
-	"platformVersion": "6.18.0",
-	"manifestVersion": "0.1"
+  "version": "0.0.1",
+  "description": "A Snap for VSL that allows users to interact with the VSL Core RPC Services.",
+  "proposedName": "VSL Wallet",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pi-Squared-Inc/vsl-wallet"
+  },
+  "source": {
+    "shasum": "6srVS/Ov1sl2kM288O+jPdSEO0NxOV913Vc534nxqzs=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "@pi2/vsl-snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:keyring": {
+      "allowedOrigins": [
+        "http://localhost:8000",
+        "http://localhost:8001",
+        "http://213.133.110.20:8000",
+        "http://213.133.110.20:8001"
+      ]
+    },
+    "snap_dialog": {},
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": true
+    },
+    "endowment:network-access": {},
+    "snap_manageAccounts": {},
+    "snap_manageState": {}
+  },
+  "platformVersion": "6.18.0",
+  "manifestVersion": "0.1"
 }

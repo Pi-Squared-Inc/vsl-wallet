@@ -1,5 +1,5 @@
 {
-	"name": "vsl_snap",
+	"name": "@pi2/vsl-snap",
 	"version": "0.0.1",
 	"description": "The VSL MetaMask Snap that allows users to interact with the VSL blockchain.",
 	"main": "./dist/bundle.js",
