@@ -10,6 +10,7 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "release-snap": "cd packages/snap && npm run prepublish && npm publish --provenance",
+    "start-companion": "npm run start --workspace packages/site",
     "dev-site": "npm run dev --workspace packages/site",
     "dev-snap": "npm run dev --workspace packages/snap",
     "dev": "run-p dev-site dev-snap",
