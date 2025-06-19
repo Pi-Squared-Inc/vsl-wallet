@@ -7,11 +7,11 @@
     "url": "https://github.com/Pi-Squared-Inc/vsl-wallet"
   },
   "source": {
-    "shasum": "6srVS/Ov1sl2kM288O+jPdSEO0NxOV913Vc534nxqzs=",
+    "shasum": "W5ONga55KsJNtGFCxb/ByEgQZmBq3WyCnfWJhL49BGg=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "packageName": "@pi2/vsl-snap",
+        "packageName": "vsl-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }
