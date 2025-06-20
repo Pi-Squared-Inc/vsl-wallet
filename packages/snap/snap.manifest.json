@@ -20,9 +20,7 @@
     "endowment:keyring": {
       "allowedOrigins": [
         "http://localhost:8000",
-        "http://localhost:8001",
-        "http://213.133.110.20:8000",
-        "http://213.133.110.20:8001"
+        "https://wallet.pi2.network"
       ]
     },
     "snap_dialog": {},
