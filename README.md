@@ -18,9 +18,10 @@ This is an example implementation intended for demonstration and educational pur
 * [MetaMask Flask](https://docs.metamask.io/snaps/get-started/install-flask/) Browser Extension.
 * (Optional) VSL Core Service running locally
 * Clone the repository
-    ```shell
-    git clone https://github.com/Pi-Squared-Inc/vsl-wallet.git
-    ```
+
+```shell
+git clone https://github.com/Pi-Squared-Inc/vsl-wallet.git
+```
 
 ### Setting up
 

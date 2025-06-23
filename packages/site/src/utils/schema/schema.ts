@@ -1,6 +1,6 @@
 import z from "zod/v4";
 import { isValidAddress } from "@ethereumjs/util";
-import { expect } from "./helper";
+import { expect, stringLte } from "./helper";
 import { Integer } from "./integer";
 import { HString } from "./string";
 
@@ -61,6 +61,12 @@ export const CompanionSettleClaimHash = z.
 
 export const CompanionAssetBalance = Integer
     .u128PrefixedHexStringCasted("Asset Balance")
+
+export const CompanionAssetDecimals = Integer
+    .u8String("Asset Decimals").refine(stringLte(18n), expect(
+        "Asset Decimals",
+        "Asset Decimals must be a string representing a number less than or equal to 18"
+    ))
 
 export const CompanionAssetId = HString
     .h256("Asset ID")

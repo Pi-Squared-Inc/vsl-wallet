@@ -105,6 +105,12 @@ export const VSLAssetBalances = z.
 export const VSLAssetName = z
     .string()
 
+export const VSLAssetDecimals = Integer.
+    u8Casted("Asset Decimal").lte(18n, expect(
+        "Asset Decimal",
+        "Asset Decimal must be a number between 0 and 18"
+    ))
+
 export const VSLAsset = z.any()
 export const VSLStateHash = z.any()
 export const VSLVoid = z.void()

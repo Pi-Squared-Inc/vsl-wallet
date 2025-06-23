@@ -1,5 +1,5 @@
 import { VSLMethod } from "../vsl/schema";
-import { SnapAddress, SnapAssetBalance, SnapAssetId, SnapAssetName, SnapMethod, SnapSigned } from "./schema";
+import { SnapAddress, SnapAssetBalance, SnapAssetDecimals, SnapAssetId, SnapAssetName, SnapMethod, SnapSigned } from "./schema";
 import { Address, Box, Heading, Row, Text } from "@metamask/snaps-sdk/jsx";
 import { throwError } from "../../util";
 
@@ -38,11 +38,13 @@ export const CreateAssetSchema = {
     address       : SnapAddress,
     assetName     : SnapAssetName,
     assetSupply   : SnapAssetBalance,
+    assetDecimals : SnapAssetDecimals,
   }),
   transform: (data: any) => ({
     account_id    : data.address,
     ticker_symbol : data.assetName,
-    total_supply  : data.assetSupply
+    total_supply  : data.assetSupply,
+    decimals      : data.assetDecimals,
   }),
   return: SnapAssetId
 }

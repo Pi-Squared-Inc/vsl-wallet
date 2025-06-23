@@ -85,6 +85,11 @@ export const SnapAssetName = z
 export const SnapOk = z.
     literal('ok')
 
+export const SnapAssetDecimals = Integer.
+    u8Casted("Asset Decimal").lte(18n, expect(
+        "Asset Decimal",
+        "Asset Decimal must be a number between 0 and 18"
+    ))
 
 export const SnapSigned = <T extends ZodRawShape>(params: T) => {
     return z.strictObject({

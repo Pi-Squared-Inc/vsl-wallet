@@ -1,4 +1,4 @@
-import { VSLAddress, VSLAssetBalance, VSLAssetId, VSLAssetName, VSLBalance, VSLMethod, VSLNonce, VSLSettledClaim, VSLSigned, VSLUnsigned } from "./schema";
+import { VSLAddress, VSLAssetBalance, VSLAssetDecimals, VSLAssetId, VSLAssetName, VSLBalance, VSLMethod, VSLNonce, VSLSettledClaim, VSLSigned, VSLUnsigned } from "./schema";
 
 export const CreateAssetSchema = {
     method: VSLMethod.vsl_createAsset,
@@ -7,6 +7,7 @@ export const CreateAssetSchema = {
         account_id    : VSLAddress,
         nonce         : VSLNonce,
         ticker_symbol : VSLAssetName,
+        decimals      : VSLAssetDecimals,
         total_supply  : VSLAssetBalance,
     }),
     return: VSLAssetId,

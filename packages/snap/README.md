@@ -205,6 +205,7 @@ A `Signed Snap RPC Method Parameter` with
 * `address`: `Snap Address`
 * `assetName`: `Snap Asset Name`
 * `assetSupply`: `Snap Asset Balance`
+* `assetDecimals`: `Snap Asset Decimals`
 
 ##### Returns
 
@@ -212,7 +213,7 @@ A `Signed Snap RPC Method Parameter` with
 
 ##### Description
 
-There will be a Snap dialog request for user confirmation, with `address`, `assetName`, and `assetSupply` listed. If user confirms, it will create asset under `address`, with ticker symbol equal to `assetName` and initial balance equal to `assetSupply`.
+There will be a Snap dialog request for user confirmation, with `address`, `assetName`, `assetSupply`, `assetDecimals` listed. If user confirms, it will create asset under `address`, with ticker symbol equal to `assetName`, initial balance equal to `assetSupply`, and `assetDecimals` decimal places. The asset ID will be returned.
 
 ##### Errors
 
@@ -587,6 +588,10 @@ The balance for asset. A number, a decimal string, or a prefixed hex string that
 
 An object with key being `Snap Asset ID` and value being `Snap Asset Balances`
 
+#### `Snap Asset Decimals`
+
+The number of decimal places for the asset. A string encoded unsigned 8-bit integer with value between 0 and 18.
+
 #### `Snap Asset ID`
 
 The asset ID used by VSL. A hex string (not prefixed) of length 64.
@@ -637,4 +642,3 @@ MetaMask Keyring Account with associated data:
 * `account`: `Keyring Account`
 * `privateKey`: `string`
 * `nonce`: `string encoded unsigned 64-bit integer`.
-

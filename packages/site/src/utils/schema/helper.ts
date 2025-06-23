@@ -15,3 +15,11 @@ export function expectSensitive(expected: string, message: string) {
         }
     }
 }
+
+export const stringLte = (value: bigint) => {
+    return (input: string) => {
+        const num = BigInt(input);
+        return num <= value;
+    }
+}
+

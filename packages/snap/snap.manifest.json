@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A Snap for VSL that allows users to interact with the VSL Core RPC Services.",
   "proposedName": "VSL Wallet",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/Pi-Squared-Inc/vsl-wallet"
   },
   "source": {
-    "shasum": "W5ONga55KsJNtGFCxb/ByEgQZmBq3WyCnfWJhL49BGg=",
+    "shasum": "JltW/2oa2202hg/Sw82MhG0OZeOBGkHHJydzzZ/VUFo=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,10 +18,7 @@
   },
   "initialPermissions": {
     "endowment:keyring": {
-      "allowedOrigins": [
-        "http://localhost:8000",
-        "https://wallet.pi2.network"
-      ]
+      "allowedOrigins": ["http://localhost:8000", "https://wallet.pi2.network"]
     },
     "snap_dialog": {},
     "endowment:rpc": {
