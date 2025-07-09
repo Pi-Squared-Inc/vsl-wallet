@@ -22,4 +22,3 @@ export const stringLte = (value: bigint) => {
         return num <= value;
     }
 }
-

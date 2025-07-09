@@ -18,7 +18,6 @@ export async function hasSnapsSupport(
 		await provider.request({
 			method: "wallet_getSnaps",
 		});
-
 		return true;
 	} catch {
 		return false;

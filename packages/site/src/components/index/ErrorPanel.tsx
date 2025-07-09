@@ -1,9 +1,8 @@
 "use client";
-
-import { useSnapStoreContext } from "@/hooks/SnapStoreContext";
+import { useAccountStoreContext } from "@/hooks/AccountStoreContext";
 
 export function ErrorPanel() {
-  const { state } = useSnapStoreContext();
+  const { state } = useAccountStoreContext();
   const { error } = state;
 
   return (

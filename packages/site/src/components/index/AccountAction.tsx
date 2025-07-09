@@ -6,12 +6,12 @@ import { createAccountAction } from "@/hooks/actions/createAccount";
 import { refreshStateAction } from "@/hooks/actions/refreshState";
 import { MdAutorenew } from "react-icons/md";
 import { importAccountAction } from "@/hooks/actions/importAccount";
-import { useSnapStore } from "@/hooks/useSnapStore";
+import { useAccountStore } from "@/hooks/useAccountStore";
 import { Json } from "@metamask/utils";
 import z from "zod/v4";
 
 export function AccountCreationAction() {
-  const { setError, clearError } = useSnapStore();
+  const { setError, clearError } = useAccountStore();
   const createAccount = createAccountAction.useHandler();
   const refreshState = refreshStateAction.useHandler();
 
@@ -51,7 +51,7 @@ export function AccountImportAction() {
 
   const importAccount = importAccountAction.useHandler();
   const refreshState = refreshStateAction.useHandler();
-  const { setError, clearError } = useSnapStore();
+  const { setError, clearError } = useAccountStore();
 
   const [ options, setOptions ] = useState<Record<string, Json>>({});
 

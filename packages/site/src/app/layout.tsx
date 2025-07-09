@@ -3,8 +3,6 @@ import localFont from "next/font/local";
 import '@fontsource/iosevka';
 import "./globals.css";
 
-import { MetaMaskProvider } from "@/hooks/MetaMaskContext";
-
 const ClashGrotesk = localFont({
   src: [{
     path: '../fonts/ClashGrotesk-Variable.woff2',
@@ -26,9 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ClashGrotesk.className}>
-        <MetaMaskProvider>
-          {children}
-        </MetaMaskProvider>
+        {children}
       </body>
     </html>
   );

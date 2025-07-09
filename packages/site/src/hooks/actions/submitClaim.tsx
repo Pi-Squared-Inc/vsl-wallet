@@ -1,6 +1,6 @@
 import { throwAccountNotFound, throwKeyringRequestFailed } from "@/utils/error";
 import { useInvokeSnap } from "../useInvokeSnap";
-import { useSnapStoreContext } from "../SnapStoreContext";
+import { useAccountStoreContext } from "../AccountStoreContext";
 import { InfoTable } from "@/components/index/InfoTable";
 import { CompanionAddressArray, CompanionClaim, CompanionClaimType, CompanionFee, CompanionProof, CompanionQuorum, CompanionTimestampNanos, CompanionTimestampSeconds } from "@/utils/schema/schema";
 import { useSnapReadyGuard } from "../useSnapReadyGuard";
@@ -31,7 +31,7 @@ export const submitClaimAction = {
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
     const guard = useSnapReadyGuard();
-    const { state } = useSnapStoreContext();
+    const { state } = useAccountStoreContext();
 
     return async (
         id: string, receivers: string[], claim: string, claimType: string,

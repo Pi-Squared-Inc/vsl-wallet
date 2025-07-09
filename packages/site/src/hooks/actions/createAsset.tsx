@@ -1,6 +1,6 @@
 import { throwAccountNotFound, throwKeyringRequestFailed } from "@/utils/error";
 import { useInvokeSnap } from "../useInvokeSnap";
-import { useSnapStoreContext } from "../SnapStoreContext";
+import { useAccountStoreContext } from "../AccountStoreContext";
 import { InfoTable } from "@/components/index/InfoTable";
 import { CompanionAssetBalance, CompanionAssetDecimals, CompanionAssetName } from "@/utils/schema/schema";
 import { updateAccountAction } from "./updateAccount";
@@ -21,7 +21,7 @@ export const createAssetAction = {
   ]),
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
-    const { state } = useSnapStoreContext();
+    const { state } = useAccountStoreContext();
     const updateAccounts = updateAccountAction.useHandler();
     const guard = useSnapReadyGuard();
 

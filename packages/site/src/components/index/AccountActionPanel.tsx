@@ -1,8 +1,8 @@
 "use client";
-import { useSnapStoreContext } from "@/hooks/SnapStoreContext";
+import { useAccountStoreContext } from "@/hooks/AccountStoreContext";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react"
 import React, { useState } from "react";
-import { useSnapStore } from "@/hooks/useSnapStore";
+import { useAccountStore } from "@/hooks/useAccountStore";
 import { refreshStateAction } from "@/hooks/actions/refreshState";
 import { transferBalanceAction } from "@/hooks/actions/transferBalance";
 import { throwInvalidParameter } from "@/utils/error";
@@ -72,8 +72,8 @@ export function AccountActionDropdown({ actions, selectedActionIndex, onChange }
 }
 
 export function AccountActionPanel() {
-  const { state } = useSnapStoreContext();
-  const { setInput, setError, clearError } = useSnapStore();
+  const { state } = useAccountStoreContext();
+  const { setInput, setError, clearError } = useAccountStore();
   const [ selectedActionIndex, setSelectedActionIndex ] = useState<number>(-1);
   const [ response, setResponse ] = useState<any | undefined>(undefined);
   const refreshState = refreshStateAction.useHandler();

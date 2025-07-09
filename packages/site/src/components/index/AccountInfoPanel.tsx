@@ -1,7 +1,7 @@
 "use client";
 
-import { VSLAccount } from "@/hooks/SnapStoreContext";
-import { useSnapStoreContext } from "@/hooks/SnapStoreContext";
+import { VSLAccount } from "@/hooks/AccountStoreContext";
+import { useAccountStoreContext } from "@/hooks/AccountStoreContext";
 import { InfoRow, InfoTable } from "./InfoTable";
 
 const formatAssetId = (assetId: string) => {
@@ -51,7 +51,7 @@ export const formatAccountInfo = (account: VSLAccount | null): Record<string, In
 
 
 export function AccountInfoPanel() {
-  const { state } = useSnapStoreContext();
+  const { state } = useAccountStoreContext();
 
   const { accounts, selectedAccountId } = state;
 

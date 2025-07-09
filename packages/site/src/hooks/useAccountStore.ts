@@ -1,9 +1,9 @@
-import { useSnapStoreContext } from "./SnapStoreContext";
+import { useAccountStoreContext } from "./AccountStoreContext";
 
 let errorTimeout: ReturnType<typeof setTimeout> | null = null;
 
-export const useSnapStore = () => {
-    const { state, dispatch } = useSnapStoreContext();
+export const useAccountStore = () => {
+    const { state, dispatch } = useAccountStoreContext();
 
     const cancelAutoClearError = () => {
         if (errorTimeout !== null) {

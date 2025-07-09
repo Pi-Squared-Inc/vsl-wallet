@@ -2,7 +2,6 @@
 import { KeyringAccount } from "@metamask/keyring-api";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 
-
 export type VSLAccount = {
   keyringAccount: KeyringAccount;
   balance: string;
@@ -105,7 +104,7 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-export const SnapStoreContext = createContext<{
+export const AccountStoreContext = createContext<{
   state: State;
   dispatch: React.Dispatch<Action>;
 }>({
@@ -113,15 +112,15 @@ export const SnapStoreContext = createContext<{
   dispatch: () => null,
 });
 
-export function SnapStoreProvider({ children }: { children: ReactNode }) {
+export function AccountStoreProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <SnapStoreContext.Provider value={{ state, dispatch }}>
+    <AccountStoreContext.Provider value={{ state, dispatch }}>
       {children}
-    </SnapStoreContext.Provider>
+    </AccountStoreContext.Provider>
   );
 }
 
-export const useSnapStoreContext = () => {
-  return useContext(SnapStoreContext);
+export const useAccountStoreContext = () => {
+  return useContext(AccountStoreContext);
 };

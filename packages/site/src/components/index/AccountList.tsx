@@ -1,9 +1,9 @@
 "use client";
 import { useMetaMask } from "@/hooks/useMetaMask";
-import { useSnapStoreContext } from "@/hooks/SnapStoreContext";
+import { useAccountStoreContext } from "@/hooks/AccountStoreContext";
 import { useEffect } from "react";
 import { refreshStateAction } from "@/hooks/actions/refreshState";
-import { useSnapStore } from "@/hooks/useSnapStore";
+import { useAccountStore } from "@/hooks/useAccountStore";
 
 
 type AccountRowProps = {
@@ -34,9 +34,9 @@ function AccountRow ({ text, onClick, selected }: AccountRowProps) {
 
 export function AccountList () {
   const { installedSnap } = useMetaMask();
-  const { state } = useSnapStoreContext();
-  const { setError } = useSnapStore();
-  const { selectAccountId } = useSnapStore();
+  const { state } = useAccountStoreContext();
+  const { setError } = useAccountStore();
+  const { selectAccountId } = useAccountStore();
 
   const refreshState = refreshStateAction.useHandler();
 

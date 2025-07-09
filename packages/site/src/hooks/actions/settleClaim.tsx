@@ -1,6 +1,6 @@
 import { throwAccountNotFound, throwKeyringRequestFailed } from "@/utils/error";
 import { useInvokeSnap } from "../useInvokeSnap";
-import { useSnapStoreContext } from "../SnapStoreContext";
+import { useAccountStoreContext } from "../AccountStoreContext";
 import { CompanionAddressArray } from "@/utils/schema/schema";
 import { useSnapReadyGuard } from "../useSnapReadyGuard";
 import z from "zod/v4";
@@ -14,7 +14,7 @@ export const settleClaimAction = {
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
     const guard = useSnapReadyGuard();
-    const { state } = useSnapStoreContext();
+    const { state } = useAccountStoreContext();
 
     return async (id: string, claim: string, receivers: string) => {
       guard();

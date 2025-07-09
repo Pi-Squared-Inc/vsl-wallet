@@ -19,21 +19,8 @@ export function runSensitive<Type>(
     }
 }
 
-export async function runAsyncSensitive<T>(
-    callback: () => Promise<T>,
-    message = 'An unexpected error occurred',
-): Promise<T> {
-    try {
-        return await callback();
-    } catch (err) {
-        // TODO!: change this to message at production
-        throw new Error((err as Error).message);
-    }
-}
-
 // correctly stringify bigints directly to JSON
 export function stringify(value: any): string {
-
     if (value === null) return 'null';
     switch (typeof value) {
         case 'bigint':

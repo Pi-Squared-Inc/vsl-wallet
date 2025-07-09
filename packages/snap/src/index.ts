@@ -1,4 +1,4 @@
-import { UserInputEventType, type OnKeyringRequestHandler, type OnRpcRequestHandler, type OnUserInputHandler } from '@metamask/snaps-sdk';
+import { type OnKeyringRequestHandler, type OnRpcRequestHandler } from '@metamask/snaps-sdk';
 
 import { handleKeyringRequest } from '@metamask/keyring-snap-sdk';
 import { VSLKeyring } from './keyring';

@@ -1,6 +1,6 @@
 import { throwAccountNotFound, throwKeyringRequestFailed } from "@/utils/error";
 import { useInvokeSnap } from "../useInvokeSnap";
-import { State, useSnapStoreContext } from "../SnapStoreContext";
+import { State, useAccountStoreContext } from "../AccountStoreContext";
 import { InfoRow, InfoTable } from "@/components/index/InfoTable";
 import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
@@ -10,7 +10,7 @@ export const getAssetBalancesAction = {
   preparer: (id: string) => [id],
   useHandler: () => {
     const invokeSnap = useInvokeSnap();
-    const { state } = useSnapStoreContext();
+    const { state } = useAccountStoreContext();
     const guard = useSnapReadyGuard();
 
     return async (id: string) => {

@@ -1,5 +1,5 @@
 import { listAccountsAction } from "./listAccounts";
-import { useSnapStoreContext } from "../SnapStoreContext";
+import { useAccountStoreContext } from "../AccountStoreContext";
 import { getBalanceAction } from "./getBalance";
 import { getAssetBalancesAction } from "./getAssetBalances";
 import { useSnapReadyGuard } from "../useSnapReadyGuard";
@@ -8,7 +8,7 @@ export const refreshStateAction = {
     name: 'Refresh State',
     inputs: [],
     useHandler: () => {
-        const { state, dispatch } = useSnapStoreContext();
+        const { state, dispatch } = useAccountStoreContext();
         const guard = useSnapReadyGuard();
         const listAccount = listAccountsAction.useHandler();
         const getBalance = getBalanceAction.useHandler();

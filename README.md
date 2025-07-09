@@ -1,6 +1,6 @@
 # VSL MetaMask Integration
 
-This repository contains an example integration between VSL (Verifiable Smart Layer) and MetaMask using the MetaMask Snaps platform. The integration consists of two main components:
+This repository contains an example integration between VSL (Verifiable Settlement Layer) and MetaMask using the MetaMask Snaps platform. The integration consists of two main components:
 
 1. A MetaMask Snap that interfaces with the VSL core server to enable secure transaction signing and verification
 2. A companion web application that demonstrates how to interact with the VSL snap

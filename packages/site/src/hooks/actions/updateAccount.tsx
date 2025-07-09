@@ -1,7 +1,7 @@
 import { throwKeyringRequestFailed } from "@/utils/error";
 import { useMetaMaskContext } from "../MetaMaskContext"
 import { Json } from "@metamask/utils";
-import { useSnapStoreContext } from "../SnapStoreContext";
+import { useAccountStoreContext } from "../AccountStoreContext";
 import { useSnapReadyGuard } from "../useSnapReadyGuard";
 
 export const updateAccountAction = {
@@ -9,7 +9,7 @@ export const updateAccountAction = {
     inputs: [],
     useHandler: () => {
         const { client } = useMetaMaskContext();
-        const { state } = useSnapStoreContext();
+        const { state } = useAccountStoreContext();
         const guard = useSnapReadyGuard();
 
         return async (id: string, options: Record<string, Json>) => {

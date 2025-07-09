@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { DashboardContainer } from "@/components/index/DashboardContainer";
 import { StateUpdater } from "@/components/index/StateUpdater";
 import { MetaMaskButton } from "@/components/MetaMaskButton"
-import { SnapStoreProvider } from "@/hooks/SnapStoreContext";
+import { AccountStoreProvider } from "@/hooks/AccountStoreContext";
 
 function DashboardHeader() {
   return (
@@ -13,7 +13,7 @@ function DashboardHeader() {
         backgroundImage: 'linear-gradient(to right in oklab, rgb(135, 41, 255) 0%, rgb(252, 252, 252) 100%)'
       }}
       >
-      VSL Snap Dashboard
+      VSL Vanity Wallet Dashboard
     </span>
   )
 }
@@ -33,9 +33,9 @@ function Dashboard() {
 }
 
 export default function App() {
-  return (<SnapStoreProvider>
+  return (<AccountStoreProvider>
     <Header />
     <Dashboard />
     <Footer />
-  </SnapStoreProvider>);
+  </AccountStoreProvider>);
 }

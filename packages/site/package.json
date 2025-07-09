@@ -1,5 +1,5 @@
 {
-	"name": "vsl_snap_companion",
+	"name": "vsl-snap-companion",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -14,6 +14,8 @@
 		"@headlessui/react": "^2.2.4",
 		"@metamask/keyring-snap-client": "^5.0.0",
 		"@metamask/sdk": "^0.33.0",
+		"vsl-snap-util": "*",
+		"vsl-snap-vanity": "*",
 		"next": "15.3.3"
 	},
 	"devDependencies": {

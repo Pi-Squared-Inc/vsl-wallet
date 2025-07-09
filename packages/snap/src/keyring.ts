@@ -84,7 +84,7 @@ export class VSLKeyring implements Keyring {
         }
         wallet.nonce = String(BigInt(wallet.nonce) + 1n);
 
-        this.#saveState('Failed to increment nonce');
+        await this.#saveState('Failed to increment nonce');
         return true;
     }
 

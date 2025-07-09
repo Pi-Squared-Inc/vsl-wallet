@@ -1,6 +1,6 @@
 import z from "zod/v4";
 import { throwAccountNotFound, throwKeyringRequestFailed } from "@/utils/error";
-import { useSnapStoreContext } from "../SnapStoreContext";
+import { useAccountStoreContext } from "../AccountStoreContext";
 import { useSnapReadyGuard } from "../useSnapReadyGuard";
 import { InfoTable } from "@/components/index/InfoTable";
 
@@ -11,7 +11,7 @@ export const personalSignAction = {
   ],
   preparer: (id: string, input: Record<string, any>) => [id, input["Message"]],
   useHandler: () => {
-    const { state } = useSnapStoreContext();
+    const { state } = useAccountStoreContext();
     const guard = useSnapReadyGuard();
 
     return async (id: string, message: string) => {
